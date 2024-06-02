@@ -1,0 +1,16 @@
+{
+  "name": "employeecontentmanagementsystem",
+  "version": "1.0.0",
+  "description": "A database allowing the user to view and edit an employee database for the company",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "inquirer": "^8.2.4",
+    "pg": "^8.11.5"
+  }
+}
