@@ -23,3 +23,22 @@ const pool = new Pool(
   app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
   });
+
+  const options = [
+    'View all departments', 'View all rows', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role', 'Exit'
+  ]
+
+inquirer.prompt(
+  [{
+    name: 'Options',
+    message: 'Choose an option below:',
+    type: "list",
+    choices: options
+  }
+  ]
+)
+.then((answer) => {
+  console.log(answer.Options)
+}
+)
+  
