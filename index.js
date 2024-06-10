@@ -5,28 +5,35 @@ const express = require('express');
 
 const { Pool } = require('pg');
 
-const PORT = process.env.PORT || 5000;
-const app = express();
 
 const pool = new Pool(
     {
       user: 'postgres',
       password: 'shoeman',
       host: 'localhost',
-      database: 'business_db'
+      database: 'business_db',
+      port: 5432,
     },
-    console.log(`Connected to the movies_db database.`)
+    console.log(`Connected to the business_db database.`)
   )
   
   pool.connect();
 
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-
-  const options = [
+const options = [
     'View all departments', 'View all rows', 'View all employees', 'Add a department', 'Add a role', 'Add an employee', 'Update an employee role', 'Exit'
   ]
+
+const viewAllDepartments = async() => {
+  const connect = await pool.connect();
+  try {
+    const res = await connect.query('SELECT name FROM department');
+    console.table(res.rows);
+  } catch (err) {
+    console.log(err)
+  } finally {
+    connect.release();
+  }
+  };
 
 inquirer.prompt(
   [{
@@ -38,7 +45,13 @@ inquirer.prompt(
   ]
 )
 .then((answer) => {
-  console.log(answer.Options)
+  switch (answer.Options){
+    case "View all departments":
+      viewAllDepartments();
+      break;
+      default:
+        console.log('Another option chosen');
+  }
 }
 )
   

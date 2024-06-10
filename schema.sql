@@ -30,4 +30,12 @@ CREATE TABLE employee (
     FOREIGN KEY (manager_id)
     REFERENCES employee(id)
     ON DELETE SET NULL
-)
+);
+
+INSERT INTO department (name)
+VALUES
+('Sales'),
+('Engineering'),
+('Finance'),
+('Legal'),
+('Banking')
