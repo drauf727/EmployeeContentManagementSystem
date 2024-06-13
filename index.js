@@ -99,24 +99,53 @@ const prompt = () => {
                   type: 'input',
                 }
               ]).then((answer) =>{
-                let command = `INSERT INTO role (name) VALUES ('${answer.role}')`;
+                let command = `INSERT INTO role (title, salary, department_id) VALUES ('${answer.title}', ${answer.salary}, ${answer.departmentid})`;
                 connectDBEdit(command);
               })
               break;
               case "Add an employee":
                 inquirer.prompt([
                   {
-                    name: 'role',
-                    message: "Employee's name:",
+                    name: 'firstname',
+                    message: "Employee's first name:",
                     type: 'input'
-                  }
+                  },
+                  {
+                    name: 'lastname',
+                    message: "Employee's last name:",
+                    type: 'input'
+                  },
+                  {
+                    name: 'roleid',
+                    message: "Employee's role id:",
+                    type: 'input'
+                  },
+                  {
+                    name: 'managerid',
+                    message: "Employee's manager id:",
+                    type: 'input'
+                  },
                 ]).then((answer) =>{
-                  let command = `INSERT INTO employee (name) VALUES ('${answer.employee}')`;
+                  let command = `INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${answer.firstname}', '${answer.lastname}', ${answer.roleid}, ${answer.managerid})`;
                   connectDBEdit(command);
                 })
                 break;
                 case "Update an employee role":
-                  updateEmployee();
+                  inquirer.prompt([
+                    {
+                      name: 'employeeid',
+                      message: "Enter employee id:",
+                      type: 'input'
+                    },
+                    {
+                      name: 'newrole',
+                      message: "Enter new role id:",
+                      type: 'input',
+                    }
+                  ]).then((answer) =>{
+                    let command = `UPDATE employee SET role_id = ${answer.newrole} WHERE id = ${answer.employeeid} `;
+                    connectDBEdit(command);
+                  })
                   break;
       default:
         console.log('Press Ctrl C to exit');
