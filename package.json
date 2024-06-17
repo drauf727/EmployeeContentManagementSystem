@@ -4,6 +4,7 @@
   "description": "A database allowing the user to view and edit an employee database for the company",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
